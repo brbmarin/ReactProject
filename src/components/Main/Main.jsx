@@ -8,9 +8,20 @@ export default function Main() {
   const [lastName, setLastName] = useState("Barbaud");
   const [bio, setBio] = useState("Developer");
 
-  const handleSubmit = (formData) => {
-    const query = formData.get("query");
-    console.log(`${query}`);
+  const handleSubmit = (event) => {
+    console.log(event);
+  };
+
+  const handleFirstNameChange = (event) => {
+    setFirstName(event.target.value);
+  };
+
+  const handleLastNameChange = (event) => {
+    setLastName(event.target.value);
+  };
+
+  const handleBioChange = (event) => {
+    setBio(event.target.value);
   };
 
   return (
@@ -33,7 +44,9 @@ export default function Main() {
       {visible && (
         <div className={styles.form}>
           <form onSubmit={handleSubmit}>
-            <input name="query" />
+            <input name="query" onChange={handleFirstNameChange} />
+            <input name="query" onChange={handleLastNameChange} />
+            <input name="query" onChange={handleBioChange} />
             <button type="submit">Send</button>
           </form>
         </div>
