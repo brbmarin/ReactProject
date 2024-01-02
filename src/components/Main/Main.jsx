@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import styles from "./Main.module.css";
 
-export default function Main({ name, age, job, bio }) {
+export default function Main() {
   const [visible, setVisible] = useState(true);
+
+  const [firstName, setFirstName] = useState("Marin");
+  const [lastName, setLastName] = useState("Barbaud");
+  const [bio, setBio] = useState("Developer");
+
+  const handleSubmit = (formData) => {
+    const query = formData.get("query");
+    console.log(`${query}`);
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.info}>
         <ul>
-          {name} <br />
-          {age} <br />
-          {job} <br />
+          {firstName} <br />
+          {lastName} <br />
           {bio}
         </ul>
       </div>
@@ -24,7 +32,7 @@ export default function Main({ name, age, job, bio }) {
       </button>
       {visible && (
         <div className={styles.form}>
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <input name="query" />
             <button type="submit">Send</button>
           </form>

@@ -8,12 +8,7 @@ function App() {
   return (
     <>
       <Header />
-      <Main
-        name="marin"
-        age={20}
-        job="developer"
-        bio="Je travaille chez Moonz en tant qu'alternant"
-      />
+      <Main />
       <Footer />
     </>
   );
