@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import styles from "./Main.module.css";
 
 export default function Main() {
@@ -36,6 +37,7 @@ export default function Main() {
 
   return (
     <div className={styles.container}>
+      <p>Profile</p>
       <div className={styles.info}>
         <ul>
           {firstName} <br />
@@ -57,18 +59,9 @@ export default function Main() {
             <p>Ouverture du formulaire {openedFormCount}</p>
             <div className={styles.form}>
               <form onSubmit={handleSubmit}>
-                <input
-                  name="firstName"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="lastName"
-                  onChange={handleInputChange}
-                />
-                <input
-                  name="bio"
-                  onChange={handleInputChange}
-                />
+                <input name="firstName" onChange={handleInputChange} />
+                <input name="lastName" onChange={handleInputChange} />
+                <input name="bio" onChange={handleInputChange} />
                 <button type="submit">Send</button>
               </form>
             </div>
