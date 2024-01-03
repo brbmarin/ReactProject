@@ -6,8 +6,12 @@ export default function Main() {
   const [firstName, setFirstName] = useState("Marin");
   const [lastName, setLastName] = useState("Barbaud");
   const [bio, setBio] = useState("Developer");
-  const [elapsedTime, setElapsedTime] = useState(0);
   const [openedFormCount, setOpenedFormCount] = useState(0);
+  const [formData, setFormData] = useState({
+    firstName: "Marin",
+    lastName: "Barbaud",
+    bio: "Developer",
+  });
 
   useEffect(() => {
     if (visible) {
@@ -15,21 +19,19 @@ export default function Main() {
     }
   }, [visible]);
 
-
   const handleSubmit = (event) => {
-    console.log(event);
+    event.preventDefault();
+    setFirstName(formData.firstName);
+    setLastName(formData.lastName);
+    setBio(formData.bio);
   };
 
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
-
-  const handleBioChange = (event) => {
-    setBio(event.target.value);
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   return (
@@ -47,7 +49,7 @@ export default function Main() {
           setVisible(!visible);
         }}
       >
-        Click
+        Form
       </button>
       {visible && (
         <>
@@ -55,9 +57,18 @@ export default function Main() {
             <p>Ouverture du formulaire {openedFormCount}</p>
             <div className={styles.form}>
               <form onSubmit={handleSubmit}>
-                <input name="query" onChange={handleFirstNameChange} />
-                <input name="query" onChange={handleLastNameChange} />
-                <input name="query" onChange={handleBioChange} />
+                <input
+                  name="firstName"
+                  onChange={handleInputChange}
+                />
+                <input
+                  name="lastName"
+                  onChange={handleInputChange}
+                />
+                <input
+                  name="bio"
+                  onChange={handleInputChange}
+                />
                 <button type="submit">Send</button>
               </form>
             </div>
