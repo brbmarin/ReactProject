@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Main.module.css";
 
 export default function Main() {
-  const [visible, setVisible] = useState(true);
-
+  const [visible, setVisible] = useState(false);
   const [firstName, setFirstName] = useState("Marin");
   const [lastName, setLastName] = useState("Barbaud");
   const [bio, setBio] = useState("Developer");
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [openedFormCount, setOpenedFormCount] = useState(0);
+
+  useEffect(() => {
+    if (visible) {
+      setOpenedFormCount((prevCount) => prevCount + 1);
+    }
+  }, [visible]);
+
 
   const handleSubmit = (event) => {
     console.log(event);
@@ -42,14 +50,19 @@ export default function Main() {
         Click
       </button>
       {visible && (
-        <div className={styles.form}>
-          <form onSubmit={handleSubmit}>
-            <input name="query" onChange={handleFirstNameChange} />
-            <input name="query" onChange={handleLastNameChange} />
-            <input name="query" onChange={handleBioChange} />
-            <button type="submit">Send</button>
-          </form>
-        </div>
+        <>
+          <div>
+            <p>Ouverture du formulaire {openedFormCount}</p>
+            <div className={styles.form}>
+              <form onSubmit={handleSubmit}>
+                <input name="query" onChange={handleFirstNameChange} />
+                <input name="query" onChange={handleLastNameChange} />
+                <input name="query" onChange={handleBioChange} />
+                <button type="submit">Send</button>
+              </form>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
